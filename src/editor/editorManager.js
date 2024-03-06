@@ -3,19 +3,26 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { getLanguageByFileName } from './utility';
 
 class EditorManager {
+  currentTabId = 0;
+  currentTabsCount = 0;
+  tabOrder = [];
+
   constructor() {
     this.editorInstances = {};
     this.currentTabId = 0;
-    monaco.editor.setTheme('vs-dark'); // Set theme for monaco
+    monaco.editor.setTheme('vs-dark');
+    document.querySelector("#addFile-tab").onclick = () => {
+      this.addTab(`untitled${this.currentTabsCount}`);
+    }
   }
 
-  createEditorInstance(tabId, language = 'javascript', value = '// Your code here') {
-    const editorContainer = document.getElementById('editorContainer'); // Reference to the container
+  createEditorInstance(tabId, language = 'javascript', value = '') {
+    const editorContainer = document.getElementById('editorContainer');
     const editorDiv = document.createElement('div');
     editorDiv.id = `editor${tabId}`;
     editorDiv.classList.add('editor', 'm-editor');
     editorDiv.style.height = '100vh';
-    editorContainer.appendChild(editorDiv); // Append to the container
+    editorContainer.appendChild(editorDiv);
 
     return monaco.editor.create(editorDiv, {
       value,
@@ -46,12 +53,26 @@ class EditorManager {
     this.currentTabId = tabId;
   }
 
-  addTab(tabId = ++this.currentTabId, fileName = 'Untitled', fileContent = '// Your code here') {
+  addTab(tabId, fileName = 'Untitled', fileContent = '// Your code here') {
+
     const tabButton = document.createElement('button');
     tabButton.textContent = fileName;
     tabButton.className = 'tab';
     tabButton.id = `tab${tabId}`;
     tabButton.onclick = () => this.switchTab(tabId);
+
+
+    const closeTabBtn = document.createElement('img');
+    closeTabBtn.setAttribute("src", "assets/times-solid-svgrepo-com.svg");
+    closeTabBtn.classList.add("tab-close-button");
+
+    closeTabBtn.onclick = (e) => {
+      e.stopPropagation();
+      this.removeTab(tabId, tabButton)
+    }
+
+    tabButton.append(closeTabBtn);
+
 
     const tabsContainer = document.getElementById('tabs');
     tabsContainer.insertBefore(tabButton, tabsContainer.lastElementChild);
@@ -59,10 +80,38 @@ class EditorManager {
     const language = getLanguageByFileName(fileName);
     const editorInstance = this.createEditorInstance(tabId, language, fileContent);
     this.editorInstances[tabId] = editorInstance;
+    this.currentTabsCount++;
 
+    this.tabOrder.push(tabId);
     this.switchTab(tabId);
   }
+
+  removeTab(tabId, tabButton) {
+    const index = this.tabOrder.indexOf(tabId);
+    if (index !== -1) {
+      this.tabOrder.splice(index, 1);
+      --this.currentTabsCount;
+      delete this.editorInstances[tabId];
+      tabButton.parentNode.removeChild(tabButton);
+      const editor = document.getElementById(`editor${tabId}`);
+      editor.parentElement.removeChild(editor);
+
+
+      // Determine the previous tab to switch to, if possible
+      const prevTabId = this.tabOrder[Math.max(0, index - 1)]; // Ensures it doesn't go below 0
+      if (prevTabId !== undefined) {
+        this.switchTab(prevTabId);
+      } else {
+        // If there's no previous tab (array is empty), reset currentTabId to an initial state or handle appropriately
+        this.currentTabId = 0;
+        // Additional logic may be required here to handle the UI state when no tabs are open.
+      }
+    }
+  }
 }
+
+
+
 
 // Export an instance of EditorManager
 const editorManager = new EditorManager();

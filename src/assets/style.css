@@ -39,7 +39,6 @@ body {
 }
 
 #sidebar {
-    width: 200px;
     background-color: #181818;
     /* Sidebar background similar to VS Code's dark theme */
     color: #ffffff;
@@ -47,6 +46,16 @@ body {
     overflow-y: auto;
     /* Scrollbar for overflowing content */
     padding: 10px;
+
+
+    flex-grow: 0;
+    /* Do not grow; stay at the width set by the JavaScript */
+    flex-shrink: 0;
+    /* Do not shrink */
+    overflow: auto;
+    /* Add scrollbars as necessary */
+    width: 250px;
+    /* Initial width */
 }
 
 
@@ -133,12 +142,12 @@ body {
 }
 
 #editorContainer {
+    background-color: #1e1e1e;
+    position: relative;
     flex-grow: 1;
-    /* Fill the remaining space */
-    display: flex;
-    /* Use flexbox to arrange tabs and editor */
     flex-direction: column;
-    /* Stack tabs and editor vertically */
+    overflow: hidden;
+    padding-left: 10px;
 }
 
 
@@ -146,13 +155,10 @@ body {
 #tabs {
     overflow: hidden;
     background-color: #181818;
-    /* VS Code tab bar background */
     display: flex;
-    /* Use flexbox for tabs */
     align-items: center;
-    /* Center items vertically */
     white-space: nowrap;
-    /* Prevent wrapping of tabs */
+    border-bottom: 1px solid #333;
 }
 
 
@@ -161,16 +167,28 @@ body {
 .tab {
     background-color: #1f1f1f;
     color: #CCCCCC;
-    border: 1px solid #4c4c4c;
+    border: 1px solid #181818;
     outline: none;
     cursor: pointer;
-    padding: 10px;
+    padding: 6px;
     padding-left: 30px;
     padding-right: 30px;
     font-size: 12px;
     font-family: Consolas, "Courier New", monospace;
     transition: background-color 0.3s;
+    position: relative;
 }
+
+
+.tab-close-button {
+    width: 14px;
+    vertical-align: middle;
+    color: white;
+    position: absolute;
+    right: 5px;
+    margin-top: 1px;
+}
+
 
 .tab.active {
     background-color: #2D2D2D;
@@ -249,6 +267,42 @@ body {
     background-color: #94004a;
     color: white;
 }
+
+.gutter {
+    width: 10px;
+    height: 100%;
+    background: #2a2a2a;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: col-resize;
+    z-index: 999;
+}
+
+#container {
+    display: inline-flex;
+    width: 100%;
+}
+
+
+
+.prevent-select,
+.prevent-select * {
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+
+
+#addFile-tab.tab {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 
 
 

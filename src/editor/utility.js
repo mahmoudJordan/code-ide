@@ -4,6 +4,7 @@ function getLanguageByFileName(fileName) {
         'py': 'python',
         'html': 'html',
         'css': 'css',
+        "json" : "json"
         // Add more mappings as needed
     };
 

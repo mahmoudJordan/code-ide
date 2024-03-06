@@ -12,7 +12,22 @@ async function getProjectFiles(projectIdentifier) {
 
 
 async function getFileContent(projectIdentifier, filePath) {
-    return await axios.get(`${baseUrl}/projects/${projectIdentifier}/file/${encodeURI(filePath)}`);
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios.get(`${baseUrl}/projects/${projectIdentifier}/file/${encodeURI(filePath)}`);
+            if (typeof response.data === 'object') {
+                resolve(JSON.stringify(response.data , null, "\t"));
+            } else {
+                resolve(response.data);
+            }
+        }
+        catch (e) {
+            console.error(e);
+            reject(e);
+        }
+
+    })
+
 }
 
 

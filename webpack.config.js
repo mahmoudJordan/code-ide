@@ -42,6 +42,11 @@ module.exports = {
         open: true, // To open the browser after server had been started
         compress: true, // Enable gzip compression
         port: 9000, // Port to run the server on,
+        client: {
+            overlay: {
+                runtimeErrors: false,
+            },
+        },
     },
 
 
@@ -60,12 +65,8 @@ module.exports = {
                     from: 'node_modules/vscode-material-icons/generated/icons',
                     to: 'assets/material-icons',
                 },
+                { from: 'src/assets', to: 'assets' } // from: source folder, to: destination folder
             ],
         })
-        // new CopyWebpackPlugin({
-        //     patterns: [
-        //         { from: 'src/assets', to: 'assets' } // from: source folder, to: destination folder
-        //     ]
-        // })
     ],
 };
