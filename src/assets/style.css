@@ -1,0 +1,255 @@
+body {
+    margin: 0px;
+}
+
+#editor {
+    border: none;
+}
+
+
+.editor-container {
+    position: relative;
+    border: 1px solid #1E1E1E;
+    background-color: #1E1E1E;
+}
+
+
+/* Style adjustments for the container that holds the tabs and the add button */
+#tabs {
+    overflow: hidden;
+    background-color: #252526;
+    /* VS Code tab bar background */
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.editor {
+    border-top: none;
+    height: calc(100% - 30px);
+    /* Adjust based on your tab and header sizes */
+}
+
+
+
+#container {
+    display: flex;
+    height: 100vh;
+    /* Set to full viewport height */
+}
+
+#sidebar {
+    width: 200px;
+    background-color: #181818;
+    /* Sidebar background similar to VS Code's dark theme */
+    color: #ffffff;
+    /* Text color */
+    overflow-y: auto;
+    /* Scrollbar for overflowing content */
+    padding: 10px;
+}
+
+
+#sidebar .file-icon {
+    width: 17px;
+    vertical-align: middle;
+    padding-right: 10px;
+}
+
+
+.sidebar-project-name {
+    color: #9e9e9e;
+    font-size: 20px;
+    margin-bottom: 20px;
+    padding-left: 10px;
+}
+
+.file,
+.folder {
+    display: block;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow-x: hidden;
+}
+
+.file-inside-folder .file {
+    padding: 0px;
+}
+
+.search-container {
+    font-family: Arial, sans-serif;
+    background: #333;
+    border-radius: 5px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.search-container input[type="search"] {
+    border: none;
+    border-radius: 3px;
+    background-color: transparent;
+    width: 100%;
+    padding: 5px;
+    color: white;
+    outline: none;
+}
+
+.search-container input[type="submit"] {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 3px;
+    background: #0066cc;
+    color: white;
+    cursor: pointer;
+}
+
+.search-container input[type="submit"]:hover {
+    background: #0057b8;
+}
+
+
+.folder-expanded .file-inside-folder {
+    margin-top: 7px;
+    margin-bottom: 7px;
+
+}
+
+
+.folder-expanded .file-inside-folder .file {
+    padding: 5px 10px;
+    padding-left: 30px;
+}
+
+.file:hover {
+    background-color: #454545;
+}
+
+.folder.folder-expanded {
+    background-color: #1d1d1d;
+}
+
+#editorContainer {
+    flex-grow: 1;
+    /* Fill the remaining space */
+    display: flex;
+    /* Use flexbox to arrange tabs and editor */
+    flex-direction: column;
+    /* Stack tabs and editor vertically */
+}
+
+
+
+#tabs {
+    overflow: hidden;
+    background-color: #181818;
+    /* VS Code tab bar background */
+    display: flex;
+    /* Use flexbox for tabs */
+    align-items: center;
+    /* Center items vertically */
+    white-space: nowrap;
+    /* Prevent wrapping of tabs */
+}
+
+
+
+
+.tab {
+    background-color: #1f1f1f;
+    color: #CCCCCC;
+    border: 1px solid #4c4c4c;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 12px;
+    font-family: Consolas, "Courier New", monospace;
+    transition: background-color 0.3s;
+}
+
+.tab.active {
+    background-color: #2D2D2D;
+    /* VS Code active tab color */
+    color: white;
+}
+
+.tab:hover {
+    background-color: #3e3e3e;
+    /* Hover color for tabs */
+}
+
+.editor {
+    flex-grow: 1;
+    /* Allow the editor to fill the space */
+    position: relative;
+    /* Needed to position the Monaco Editor correctly */
+}
+
+/* Add styles for the Monaco Editor */
+.monaco-editor,
+.m-editor {
+    height: 100% !important;
+    /* Set the editor height to fill the container */
+}
+
+
+
+.chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    transform: rotate(135deg);
+    float: right;
+    margin-top: 3px;
+    border-color: #8c8c8c;
+}
+
+
+
+.chevron.down {
+    transform: rotate(135deg);
+}
+
+.chevron.up {
+    transform: rotate(-45deg);
+}
+
+
+
+
+
+.topnav {
+    overflow: hidden;
+    background-color: #252525;
+}
+
+.topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 7px 12px;
+    text-decoration: none;
+    font-size: 14px;
+    font-family: system-ui;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.topnav a.active {
+    background-color: #94004a;
+    color: white;
+}
+
+
+
+@import '/node_modules/file-icons-js/css/style.css';

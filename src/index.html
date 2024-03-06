@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Monaco Editor Tabs</title>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="#home">File</a>
+        <a href="#news">Edit</a>
+        <a href="#contact">View</a>
+        <a href="#about">Run</a>
+    </div>
+    <div id="container">
+
+        <div id="sidebar">
+            <div class="sidebar-project-name"></div>
+            <div class="search-container">
+                <input type="search" placeholder="Search...">
+            </div>
+            <div class="sidebar-files"></div>
+        </div>
+        <div id="editorContainer">
+            <!-- Existing tabs and editor container -->
+            <div id="tabs"></div>
+            <div id="editor"></div>
+        </div>
+    </div>
+    <!-- Webpack will automatically inject your script tags here -->
+</body>
+
+</html>
