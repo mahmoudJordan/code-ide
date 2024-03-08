@@ -11,6 +11,7 @@ const port = process.env.PORT || 3000;
 var livereload = require("livereload");
 var connectLiveReload = require("connect-livereload");
 const cors = require('cors');
+const filesController = require('./routes/filesController');
 
 
 const liveReloadServer = livereload.createServer();
@@ -34,7 +35,7 @@ app.use(connectLiveReload());
 // Serve static files from the 'src' directory
 app.use(express.static('src'));
 
-
+app.use(`/files` , filesController)
 
 app.get('/projects/:identifier', async (req, res, next) => {
   const { identifier } = req.params;

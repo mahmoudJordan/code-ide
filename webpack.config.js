@@ -5,7 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     // The entry point of your application
-    entry: './src/main.js',
+    entry: './src/index.js',
     mode: 'development',
     // Configuration for your output files
     output: {
@@ -47,6 +47,9 @@ module.exports = {
                 runtimeErrors: false,
             },
         },
+        devMiddleware: {
+            writeToDisk: true
+        }
     },
 
 
